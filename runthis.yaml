@@ -1,0 +1,31 @@
+---
+- name: run the playbook for nginx
+  hosts: hetzner
+  become: true
+  gather_facts: no
+
+  tasks:
+
+  - name: update apt cache
+    apt:
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+      # upgrade: yes
+
+  - name: Install NGiNX
+    apt:
+      name: nginx
+      state: present
+
+
+  - name: Insert Index Page
+    template:
+      src: index.html
+      # dest: /usr/share/nginx/html/index.html
+      # dest: /var/www/html/index.html
+      dest: /var/www/html/index.nginx-debian.html
+
+  - name: reStart NGiNX
+    service:
+      name: nginx
+      state: restarted

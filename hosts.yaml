@@ -1,9 +1,22 @@
----
+
 all:
   children:
     boxes:
       children:
         home:
           hosts:
-            thatmachine:
-              ansible_host: 192.168.1.8
+            chromebox.cg.home.arpa:
+              # ansible_host: 192.168.0.2
+              ansible_python_interpreter: /usr/bin/python3
+            nuc.cg.home.arpa:
+              # ansible_host: 192.168.0.3
+              ansible_python_interpreter: /usr/bin/python3
+            iMac.cg.home.arpa:
+              # ansible_host: 192.168.0.4
+              ansible_python_interpreter: /usr/bin/python3
+        cloud:
+          hosts:
+            hetzner:
+              ansible_user: root
+              ansible_become_method: su
+              ansible_host: 5.78.109.225
